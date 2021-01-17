@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">AfrocamGist</string>
+    <string name="action_settings">Settings</string>
+    <string-array name="TLspinner">
+        <item>Afro Swagger</item>
+        <item>Afro Talent</item>
+        <item>Most Popular</item>
+    </string-array>
+
+    <string-array name="searchSpinner">
+        <item>HashTag</item>
+        <item>PostID</item>
+    </string-array>
+</resources>
