@@ -76,6 +76,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
                 intent.putExtra("maintext", data.getPostText());
                 intent.putExtra("likecount",  String.valueOf(data.getLikeCount()));
                 intent.putExtra("commentcount", String.valueOf(data.getCommentCount()));
+                intent.putExtra("postId", data.getPostId());
 
                 startActivity(intent);
 

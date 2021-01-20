@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     Spinner spinner;
     CustomAdapter adapter;
     List<TLData> pacList;
-    //List<Comments> commentList;
 
     private KAlertDialog prog;
 
@@ -59,7 +58,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         prog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
         prog.setTitleText("Fetching Data");
         prog.setCancelable(false);
-        //prog.show();
 
         service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
 
@@ -86,11 +84,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 intent.putExtra("maintext", data.getPostText());
                 intent.putExtra("likecount",  String.valueOf(data.getLikeCount()));
                 intent.putExtra("commentcount", String.valueOf(data.getCommentCount()));
-                intent.putExtra("postId", data.getPostId());
+                intent.putExtra("postId", String.valueOf(data.getPostId()));
 
                 startActivity(intent);
-
-
             }
         };
 
@@ -102,58 +98,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         recyclerView.addItemDecoration(decoration);
 
         pacList = new ArrayList<>();
-        //commentList = new ArrayList<>();
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-//        final Call<JsonObject> call = service.getAfroSwaggerPost("Bearer " + TOKEN);
-//        call.enqueue(new Callback<JsonObject>() {
-//            @Override
-//            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-//                prog.dismissWithAnimation();
-//                final JsonObject body = response.body();
-//                String postText;
-//                if (body != null){
-//                    final JsonArray data = body.getAsJsonArray("data");
-//                    for (int i = 0; i<data.size(); i++){
-//                        final JsonObject jsonElement =  (JsonObject) data.get(i);
-//                        final JsonElement id = jsonElement.get("_id");
-//                        final JsonElement post_text = jsonElement.get("post_text");
-//                        final JsonElement like_count = jsonElement.get("like_count");
-//                        final JsonElement comment_count = jsonElement.get("comment_count");
-//                        final JsonElement first_name = jsonElement.get("first_name");
-//                        final JsonElement user_id = jsonElement.get("user_id");
-//                        final JsonElement profile_image_url = jsonElement.get("profile_image_url");
-//
-//                        if (post_text.getAsString().isEmpty()){
-//                            postText = "Test string used to replace empty post";
-//                        }else{
-//                            postText = post_text.getAsString();
-//                        }
-//
-//                        pacList.add(new TLData(id.toString(),
-//                                postText,
-//                                Integer.parseInt(like_count.getAsString()),
-//                                Integer.parseInt(comment_count.getAsString()),
-//                                first_name.getAsString(),
-//                                Integer.parseInt(user_id.getAsString()),
-//                                profile_image_url.getAsString()));
-//
-//                        adapter.setTasks(pacList);
-//
-//                        Log.d("dsdsd", pacList.toString());
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<JsonObject> call, Throwable t) {
-//
-//            }
-//        });
     }
 
     @Override
@@ -284,23 +233,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                                 final JsonElement post_id = jsonElement.get("post_id");
                                 final JsonElement profile_image_url = jsonElement.get("profile_image_url");
 
-
-//                                final JsonArray comments = jsonElement.getAsJsonArray("comments");
-//                                if (comments != null){
-//                                    for(int j =0; j<comments.size(); j++){
-//                                        final JsonObject commentObj = (JsonObject) comments.get(j);
-//                                        final JsonElement comment_text = commentObj.get("comment_text");
-//                                        final JsonObject commented_by = commentObj.getAsJsonObject("commented_by");
-//                                        final JsonElement first_name1 = commented_by.get("first_name");
-//                                        final JsonElement profile_image_url1 = commented_by.get("profile_image_url");
-//
-//                                        commentList.add(new Comments(comment_text.getAsString(), profile_image_url1.getAsString(), first_name1.getAsString()));
-//
-//                                    }
-//
-//
-//                                }
-
                                 if (post_text.getAsString().isEmpty()){
                                     postText = "Test string used to replace empty post";
                                 }else{
@@ -351,22 +283,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                                 final JsonElement first_name = jsonElement.get("first_name");
                                 final JsonElement post_id = jsonElement.get("post_id");
                                 final JsonElement profile_image_url = jsonElement.get("profile_image_url");
-
-//                                final JsonArray comments = jsonElement.getAsJsonArray("comments");
-//                                if (comments != null){
-//                                    for(int j =0; j<comments.size(); j++){
-//                                        final JsonObject commentObj = (JsonObject) comments.get(j);
-//                                        final JsonElement comment_text = commentObj.get("comment_text");
-//                                        final JsonObject commented_by = commentObj.getAsJsonObject("commented_by");
-//                                        final JsonElement first_name1 = commented_by.get("first_name");
-//                                        final JsonElement profile_image_url1 = commented_by.get("profile_image_url");
-//
-//                                        commentList.add(new Comments(comment_text.getAsString(), profile_image_url1.getAsString(), first_name1.getAsString()));
-//
-//                                    }
-//
-//
-//                                }
 
                                 if (post_text.getAsString().isEmpty()){
                                     postText = "Test string used to replace empty post";

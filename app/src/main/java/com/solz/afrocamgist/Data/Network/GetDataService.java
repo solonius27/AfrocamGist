@@ -1,7 +1,6 @@
 package com.solz.afrocamgist.Data.Network;
 
 import com.google.gson.JsonObject;
-import com.solz.afrocamgist.Data.Models.AddComment;
 
 import java.util.HashMap;
 
@@ -37,8 +36,9 @@ public interface GetDataService {
     Call<JsonObject> deletePost(@Header("Authorization") String token, @Path("postid") String post);
 
 
-    @POST("/api/comments/")
-    Call<JsonObject> postComment(@Header("Authorization") String token, @Body AddComment body);
+    @POST("/api/comments")
+    @Headers("Content-Type: application/json")
+    Call<JsonObject> postComment(@Header("Authorization") String token, @Body HashMap<String, Object> body);
 
 
 
