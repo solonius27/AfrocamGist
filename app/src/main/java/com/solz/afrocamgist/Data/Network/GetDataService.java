@@ -35,10 +35,15 @@ public interface GetDataService {
     @DELETE("/api/posts/{postid}")
     Call<JsonObject> deletePost(@Header("Authorization") String token, @Path("postid") String post);
 
-
     @POST("/api/comments")
     @Headers("Content-Type: application/json")
     Call<JsonObject> postComment(@Header("Authorization") String token, @Body HashMap<String, Object> body);
+
+    @POST("/api/posts")
+    @Headers("Content-Type: application/json")
+    Call<JsonObject> newPost(@Header("Authorization") String token, @Body HashMap<String, Object> body);
+
+
 
 
 

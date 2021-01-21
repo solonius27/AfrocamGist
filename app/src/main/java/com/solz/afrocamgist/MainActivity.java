@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import com.developer.kalert.KAlertDialog;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     Spinner spinner;
     CustomAdapter adapter;
     List<TLData> pacList;
+    FloatingActionButton fab;
 
     private KAlertDialog prog;
 
@@ -89,6 +91,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 startActivity(intent);
             }
         };
+
+        fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MainActivity.this, AddActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
