@@ -36,10 +36,11 @@ import java.util.Map;
 
 import static android.widget.LinearLayout.VERTICAL;
 import static com.solz.afrocamgist.MainActivity.TOKEN;
+import static com.solz.afrocamgist.MainActivity.service;
 
 public class DetailsActivity extends AppCompatActivity {
 
-    ImageView image;
+    ImageView image, favImge, receivedImage;
     TextView username, main_post, likes_count, comment_count, comments_section;
     LinearLayout likeLi, commentLi;
     EditText editText;
@@ -67,6 +68,8 @@ public class DetailsActivity extends AppCompatActivity {
 
 
         image = findViewById(R.id.detail_image);
+        favImge = findViewById(R.id.fav_image);
+        receivedImage = findViewById(R.id.receivedImage);
         username = findViewById(R.id.detail_username);
         main_post = findViewById(R.id.detail_mainText);
         likes_count = findViewById(R.id.detail_likesCount);
@@ -102,6 +105,9 @@ public class DetailsActivity extends AppCompatActivity {
         comment_count.setText(commC);
 
 
+
+
+
         pageData(post_id, a);
 
 
@@ -110,6 +116,55 @@ public class DetailsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 editText.setVisibility(View.VISIBLE);
                 button.setVisibility(View.VISIBLE);
+            }
+        });
+
+        likeLi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                HashMap<String, Object> hm = new HashMap<>();
+                hm.put("post_id", Integer.parseInt(post_id));
+
+
+                final Call<JsonObject> call = service.postLike("Bearer " + TOKEN, hm);
+                call.enqueue(new Callback<JsonObject>() {
+                    @Override
+                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                        final JsonObject body = response.body();
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<JsonObject> call, Throwable t) {
+
+                    }
+                });
+
+                final Call<JsonObject> xx = MainActivity.service.getPostIdSearch("Bearer " + TOKEN, post_id);
+                xx.enqueue(new Callback<JsonObject>() {
+                    @Override
+                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                        final JsonObject body = response.body();
+                        if (body != null){
+                            final JsonObject data = body.getAsJsonObject("data");
+                            final JsonElement count_element = data.get("like_count");
+                            likes_count.setText(count_element.getAsString());
+                            favImge.setImageResource(R.drawable.fav_red);
+
+
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<JsonObject> call, Throwable t) {
+
+                    }
+                });
+
             }
         });
 
@@ -188,15 +243,6 @@ public class DetailsActivity extends AppCompatActivity {
                     }
                 });
 
-
-
-
-
-
-
-
-
-
 //                pageData(post_id, b);
 
             }
@@ -212,6 +258,19 @@ public class DetailsActivity extends AppCompatActivity {
                 final JsonObject body = response.body();
                 if (body != null) {
                     final JsonObject data = body.getAsJsonObject("data");
+                    try {
+                        final JsonArray post_image = data.getAsJsonArray("post_image");
+                        if(post_image != null){
+                            receivedImage.setVisibility(View.VISIBLE);
+                            final JsonElement jsonElementImsge = post_image.get(0);
+                            String finaImage = jsonElementImsge.getAsString();
+
+                            Picasso.get().load(String.format("https://cdn.staging.afrocamgist.com/%s", finaImage)).placeholder(R.drawable.profilepic).into(receivedImage);
+
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     final JsonArray comments = data.getAsJsonArray("comments");
 
                     if(comments != null){
