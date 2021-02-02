@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private KAlertDialog prog;
 
     static GetDataService service;
+
     public static final String TOKEN = "1349c73031d66e55d10d3fb98bc38fb8039140ca8401845c7b5cb159e06b5c0f";
 
     @Override
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         prog.setCancelable(false);
 
         service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+
 
         spinner = findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> spinneradapter = ArrayAdapter.createFromResource(this,

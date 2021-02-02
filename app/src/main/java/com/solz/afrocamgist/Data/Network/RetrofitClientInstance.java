@@ -10,6 +10,7 @@ public class RetrofitClientInstance {
 
 
 
+
     public static Retrofit getRetrofitInstance() {
 
         if (retrofit == null) {
@@ -21,4 +22,7 @@ public class RetrofitClientInstance {
         }
         return retrofit;
     }
+
+
+
 }

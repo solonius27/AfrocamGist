@@ -41,4 +41,10 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828' //loadImage
     implementation 'com.github.TutorialsAndroid:KAlertDialog:v14.0.19'
     //dialog . also need to add "maven { url 'https://jitpack.io' }" in build.gradle allprojects
+
+    implementation 'net.alhazmy13.MediaPicker:libary:2.4.4'
+
+    implementation 'com.karumi:dexter:6.2.2' //permissions
+
+
 }

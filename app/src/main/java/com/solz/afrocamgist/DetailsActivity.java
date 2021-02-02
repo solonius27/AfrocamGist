@@ -109,6 +109,12 @@ public class DetailsActivity extends AppCompatActivity {
 
 
         pageData(post_id, a);
+        receivedImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
 
         commentLi.setOnClickListener(new View.OnClickListener() {
@@ -266,6 +272,7 @@ public class DetailsActivity extends AppCompatActivity {
                             String finaImage = jsonElementImsge.getAsString();
 
                             Picasso.get().load(String.format("https://cdn.staging.afrocamgist.com/%s", finaImage)).placeholder(R.drawable.profilepic).into(receivedImage);
+
 
                         }
                     } catch (Exception e) {
