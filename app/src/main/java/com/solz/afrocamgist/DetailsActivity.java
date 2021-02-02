@@ -54,6 +54,9 @@ public class DetailsActivity extends AppCompatActivity {
     Intent intent;
 
 
+    String imageforward;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,6 +115,10 @@ public class DetailsActivity extends AppCompatActivity {
         receivedImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Intent intentv = new Intent(DetailsActivity.this, ViewImageFull.class);
+                intentv.putExtra("imageUrl", imageforward );
+                startActivity(intentv);
 
             }
         });
@@ -270,6 +277,7 @@ public class DetailsActivity extends AppCompatActivity {
                             receivedImage.setVisibility(View.VISIBLE);
                             final JsonElement jsonElementImsge = post_image.get(0);
                             String finaImage = jsonElementImsge.getAsString();
+                            imageforward = finaImage;
 
                             Picasso.get().load(String.format("https://cdn.staging.afrocamgist.com/%s", finaImage)).placeholder(R.drawable.profilepic).into(receivedImage);
 
